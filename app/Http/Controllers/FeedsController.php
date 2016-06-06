@@ -38,14 +38,14 @@ class FeedsController extends Controller
      */
     public function store(FeedRequest $request)
     {
-    	// Persist the feed
-    	Feed::create($request->all());
+        // Persist the feed
+        Feed::create($request->all());
 
-    	// Flash the successful create
-    	flash()->overlay('Success!', 'Your feed was successfully created.');
+        // Flash the successful create
+        flash()->overlay('Success!', 'Your feed was successfully created.');
 
-    	// Redirect to the landing page
-    	return redirect()->back();
+        // Redirect to the landing page
+        return redirect()->back();
     }
 
     /**
@@ -56,7 +56,9 @@ class FeedsController extends Controller
      */
     public function show($id)
     {
-        //
+        $feed = Feed::find($id);
+
+        return view('feeds.show', compact('feed'));
     }
 
     /**
