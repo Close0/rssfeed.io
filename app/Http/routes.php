@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('feeds', 'FeedsController');
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
