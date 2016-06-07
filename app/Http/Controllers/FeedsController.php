@@ -8,6 +8,8 @@ use App\Http\Requests\FeedRequest;
 
 use App\Feed;
 
+use Auth;
+
 class FeedsController extends Controller
 {
     public function __construct()
@@ -43,14 +45,19 @@ class FeedsController extends Controller
      */
     public function store(FeedRequest $request)
     {
-        // Persist the feed
-        Feed::create($request->all());
+        // Create and persist the new feed
+        $feed = new Feed;
+        $feed->title = $request->input('title');
+        $feed->link = $request->input('link');
+        $feed->description = $request->input('description');
+        $feed->user_id = \Auth::user()->id;
+        $feed->save();
 
         // Flash the successful create
-        flash()->overlay('Success!', 'Your feed was successfully created.');
+        flash()->success('Success!', 'Your feed was successfully created.');
 
-        // Redirect to the landing page
-        return redirect()->back();
+        // Redirect to the feed page
+        return redirect("/feeds/{$feed->id}");
     }
 
     /**
