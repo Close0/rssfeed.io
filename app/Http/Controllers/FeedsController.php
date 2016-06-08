@@ -81,7 +81,9 @@ class FeedsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $feed = Feed::find($id);
+
+        return view('feeds.edit', compact('feed'));
     }
 
     /**
