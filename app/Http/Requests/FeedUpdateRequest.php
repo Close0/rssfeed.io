@@ -4,7 +4,10 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class FeedRequest extends Request
+use App\Feed;
+use Auth;
+
+class FeedUpdateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +16,9 @@ class FeedRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        $feedId = $this->route('feeds');
+
+        return Feed::where('id', $feedId)->where('user_id', Auth::id())->exists();
     }
 
     /**

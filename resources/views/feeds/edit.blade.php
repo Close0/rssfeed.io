@@ -3,7 +3,7 @@
 @section('content')
 	<h1>Edit your RSS Feed</h1>
 	<div class="row">
-		<form method="POST" action="/feeds/{{ $feed->id }}/edit" class="col-md-6">
+		{!! Form::model($feed, [ 'method' => 'PATCH', 'route' => ['feeds.update', $feed->id] ]) !!}
 			@include('feeds.form')
 
 			@if (count($errors) > 0)
@@ -16,6 +16,6 @@
 				</div>
 			@endif
 
-		</form>
+		{!! Form::close() !!}
 	</div>
 @stop

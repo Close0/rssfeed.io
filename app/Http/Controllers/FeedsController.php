@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\FeedRequest;
+use App\Http\Requests\FeedCreateRequest;
+use App\Http\Requests\FeedUpdateRequest;
 
 use App\Feed;
-
 use Auth;
 
 class FeedsController extends Controller
@@ -40,17 +40,17 @@ class FeedsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\FeedRequest  $request
+     * @param  \App\Http\Requests\FeedCreateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FeedRequest $request)
+    public function store(FeedCreateRequest $request)
     {
         // Create and persist the new feed
         $feed = new Feed;
         $feed->title = $request->input('title');
         $feed->link = $request->input('link');
         $feed->description = $request->input('description');
-        $feed->user_id = \Auth::user()->id;
+        $feed->user_id = Auth::user()->id;
         $feed->save();
 
         // Flash the successful create
@@ -89,13 +89,17 @@ class FeedsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\FeedUpdateRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FeedUpdateRequest $request, $id)
     {
-        //
+        $feed = Feed::find($id);
+        $feed->update($request->all());
+
+        // Redirect to the feed page
+        return redirect("/feeds/{$feed->id}");
     }
 
     /**
