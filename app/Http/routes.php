@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
-Route::resource('feeds', 'FeedsController');
+Route::resource('feed', 'FeedsController');
+Route::resource('feed.item', 'FeedItemsController');
 
 Route::auth();
 

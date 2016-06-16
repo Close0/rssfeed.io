@@ -17,8 +17,8 @@ class CreateFeedsItemsTable extends Migration
             $table->integer('feed_id')->unsigned();
             $table->foreign('feed_id')->references('id')->on('feeds');
             $table->string('title');
-            $table->string('link');
-            $table->text('description');
+            $table->string('link')->nullable();
+            $table->text('description')->nullable();
             $table->string('author')->nullable();
             $table->string('category')->nullable();
             $table->string('enclosure')->nullable();

@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 use App\Feed;
 use Auth;
 
-class FeedUpdateRequest extends Request
+class FeedItemCreateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,9 +29,7 @@ class FeedUpdateRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required',
-            'link' => 'required',
-            'description' => 'required',
+            //
         ];
     }
 }

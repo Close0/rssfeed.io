@@ -8,6 +8,7 @@ use App\Http\Requests\FeedCreateRequest;
 use App\Http\Requests\FeedUpdateRequest;
 
 use App\Feed;
+use App\FeedItem;
 use Auth;
 
 class FeedsController extends Controller
@@ -34,7 +35,7 @@ class FeedsController extends Controller
      */
     public function create()
     {
-        return view('feeds.create');
+        return view('feed.create');
     }
 
     /**
@@ -57,7 +58,7 @@ class FeedsController extends Controller
         flash()->success('Success!', 'Your feed was successfully created.');
 
         // Redirect to the feed page
-        return redirect("/feeds/{$feed->id}");
+        return redirect("/feed/{$feed->id}");
     }
 
     /**
@@ -69,8 +70,9 @@ class FeedsController extends Controller
     public function show($id)
     {
         $feed = Feed::find($id);
+        $feedItems = $feed->items()->get();
 
-        return view('feeds.show', compact('feed'));
+        return view('feed.show', compact('feed', 'feedItems'));
     }
 
     /**
@@ -83,7 +85,7 @@ class FeedsController extends Controller
     {
         $feed = Feed::find($id);
 
-        return view('feeds.edit', compact('feed'));
+        return view('feed.edit', compact('feed'));
     }
 
     /**
@@ -99,7 +101,7 @@ class FeedsController extends Controller
         $feed->update($request->all());
 
         // Redirect to the feed page
-        return redirect("/feeds/{$feed->id}");
+        return redirect("/feed/{$feed->id}");
     }
 
     /**

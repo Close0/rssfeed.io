@@ -1,10 +1,11 @@
 @extends('layout')
 
 @section('content')
-	<h1>Create your RSS Feed</h1>
+	<h1>Edit your RSS Feed</h1>
 	<div class="row">
-		<form method="POST" action="/feeds" class="col-md-6">
-			@include('feeds.form')
+		<form method="POST" action="/feed/{{ $feed->id }}/item/{{ $feedItem->id }}">
+			<input name="_method" type="hidden" value="PATCH">
+			@include('feed.item.form')
 
 			@if (count($errors) > 0)
 				<div class="alert alert-danger">
@@ -15,7 +16,6 @@
 					</ul>
 				</div>
 			@endif
-
 		</form>
 	</div>
 @stop
