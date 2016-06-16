@@ -22,9 +22,9 @@ class Feed extends Model
         return $this->hasMany('App\FeedItem');
     }
 
-    public function owner()
+    public function user()
     {
-        $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function ownedBy(User $user)

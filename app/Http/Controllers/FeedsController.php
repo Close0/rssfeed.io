@@ -116,8 +116,9 @@ class FeedsController extends Controller
     {
         $feed = Feed::find($id);
         $feedItems = $feed->items()->get();
+        $owner = $feed->user()->get()->first();
 
-        return response()->view('feed.render.rss', compact('feed', 'feedItems'))
+        return response()->view('feed.render.rss', compact('feed', 'feedItems', 'owner'))
             ->header('Content-Type', 'application/rss+xml; charset=ISO-8859-1');
     }
 }

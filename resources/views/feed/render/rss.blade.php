@@ -9,8 +9,8 @@
         <lastBuildDate>{{ \Carbon\Carbon::now()->toRssString() }}</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>RSSFeed.io</generator>
-        <managingEditor>editor@example.com</managingEditor>
-        <webMaster>webmaster@example.com</webMaster>
+        <managingEditor>{{ $owner->email }}</managingEditor>
+        <webMaster>{{ $owner->email }}</webMaster>
         @if (count($feedItems) > 0)
             @foreach ($feedItems as $feedItem)
                 <item>
