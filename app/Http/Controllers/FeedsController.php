@@ -47,12 +47,9 @@ class FeedsController extends Controller
     public function store(FeedCreateRequest $request)
     {
         // Create and persist the new feed
-        $feed = new Feed;
-        $feed->title = $request->input('title');
-        $feed->link = $request->input('link');
-        $feed->description = $request->input('description');
-        $feed->user_id = Auth::user()->id;
-        $feed->save();
+        $input = Request::all();
+        $input['user_id'] = Auth::user()->id;
+        Feed::create($input);
 
         // Flash the successful create
         flash()->success('Success!', 'Your feed was successfully created.');
@@ -113,5 +110,14 @@ class FeedsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function render($id)
+    {
+        $feed = Feed::find($id);
+        $feedItems = $feed->items()->get();
+
+        return response()->view('feed.render.rss', compact('feed', 'feedItems'))
+            ->header('Content-Type', 'application/rss+xml; charset=ISO-8859-1');
     }
 }

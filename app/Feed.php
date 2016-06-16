@@ -31,4 +31,9 @@ class Feed extends Model
     {
         return $this->user_id == $user->id;
     }
+
+    public function rssPublishedDate()
+    {
+        return $this->created_at->toRSSString();
+    }
 }

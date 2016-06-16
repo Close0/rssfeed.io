@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
+Route::get('/feed/{id}.xml', 'FeedsController@render');
 Route::resource('feed', 'FeedsController');
 Route::resource('feed.item', 'FeedItemsController');
 
