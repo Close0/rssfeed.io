@@ -10,9 +10,4 @@ class FeedItem extends Model
     {
         return $this->belongsTo('App\Feed');
     }
-
-    public function rssPublishedDate()
-    {
-        return $this->created_at->toRSSString();
-    }
 }

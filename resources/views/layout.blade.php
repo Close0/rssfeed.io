@@ -94,5 +94,6 @@
 		<script src="/js/libs.js"></script>
 
 		@include('flash')
+		@yield('pageJavaScript')
 	</body>
 </html>

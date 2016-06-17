@@ -5,7 +5,7 @@
         <link>{{ $feed->link }}</link>
         <description>{{ $feed->description }}</description>
         <language>en-us</language>
-        <pubDate>{{ $feed->rssPublishedDate() }}</pubDate>
+        <pubDate>{{ $feed->created_at->toRssString() }}</pubDate>
         <lastBuildDate>{{ \Carbon\Carbon::now()->toRssString() }}</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>RSSFeed.io</generator>
@@ -21,7 +21,7 @@
                      @if (!empty($feedItem->description))
                         <description>{{ $feedItem->description }}</description>
                     @endif
-                    <pubDate>{{ $feedItem->rssPublishedDate() }}</pubDate>
+                    <pubDate>{{ $feedItem->created_at->toRssString() }}</pubDate>
                 </item>
             @endforeach
         @endif

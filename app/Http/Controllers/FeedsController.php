@@ -47,9 +47,10 @@ class FeedsController extends Controller
     public function store(FeedCreateRequest $request)
     {
         // Create and persist the new feed
-        $input = Request::all();
-        $input['user_id'] = Auth::user()->id;
-        Feed::create($input);
+        $feed = new Feed;
+        $feed->fill($request->all());
+        $feed->user_id = Auth::user()->id;
+        $feed->save();
 
         // Flash the successful create
         flash()->success('Success!', 'Your feed was successfully created.');

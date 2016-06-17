@@ -15,6 +15,8 @@ class Feed extends Model
         'title',
         'link',
         'description',
+        'copyright',
+        'language',
     ];
 
     public function items()
@@ -30,10 +32,5 @@ class Feed extends Model
     public function ownedBy(User $user)
     {
         return $this->user_id == $user->id;
-    }
-
-    public function rssPublishedDate()
-    {
-        return $this->created_at->toRSSString();
     }
 }
