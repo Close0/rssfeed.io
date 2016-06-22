@@ -15,7 +15,7 @@ class FeedsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['render']]);
     }
 
     /**
@@ -25,7 +25,8 @@ class FeedsController extends Controller
      */
     public function index()
     {
-        //
+        $feeds = Auth::user()->feeds()->get();
+        return view('feed.index', compact('feeds'));
     }
 
     /**

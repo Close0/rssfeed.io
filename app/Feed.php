@@ -24,6 +24,11 @@ class Feed extends Model
         return $this->hasMany('App\FeedItem');
     }
 
+    public function image()
+    {
+        return $this->hasOne('App\FeedImage');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
